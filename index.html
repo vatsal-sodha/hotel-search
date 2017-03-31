@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.js"></script>
 		<script type="text/javascript" src="js/materialize.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<script type="text/javascript" src="js/index.js"></script>
 
@@ -27,6 +28,24 @@
 				</ul>
 			</div>
 		</nav>
+		<div class="row center-align" ng-app="search" ng-controller="searchHotels">
+		    	<div class="hidden col s2"></div>
+		    	<div class="col s8 center-align" style="padding-top: 20em;">
+			        <div class="input-field col s8">
+			          <i class="material-icons prefix">search</i>
+			          <input id="icon_prefix" type="text" class="validate" ng-model="query">
+			          <label for="icon_prefix">Search here</label>
+			          </div>
+			         <div class="col s4" style="padding-top: 2em;">
+					<button class="btn waves-effect waves-light blue" type="submit" ng-click="search()" name="search">Search
+					<i class="material-icons right">input</i>
+					</button>
+					</div>
+				</div>
+							
+
+        </div>
+        
 		<!-- Login modal -->
 	<div id="login" class="modal">
 	    <div class="modal-content">
