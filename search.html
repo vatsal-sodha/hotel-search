@@ -6,14 +6,13 @@
 		<link rel="stylesheet" href="css/materialize.min.css">
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.js"></script>
-		<script type="text/javascript" src="js/materialize.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<script type="text/javascript" src="js/index.js"></script>
 
 	<title>Nocturnal</title>
 </head>
-<body ng-app="search">
+<body >
 <nav class="nav-extended white	">
 			<div class="nav-wrapper">
 				<a href="#" class="brand-logo center blue-text">Nocturnal</a>
@@ -28,9 +27,10 @@
 				</ul>
 			</div>
 		</nav>
-		<div class="row center-align"  ng-controller="searchHotels">
+		<div class="row" ng-app="search" ng-controller="searchHotels">		
+		<div class="row center-align" >
 		    	<div class="hidden col s2"></div>
-		    	<div class="col s8 center-align" style="padding-top: 20em;">
+		    	<div class="col s8 center-align">
 			        <div class="input-field col s8">
 			          <i class="material-icons prefix">search</i>
 			          <input id="icon_prefix" type="text" class="validate" ng-model="query">
@@ -42,9 +42,26 @@
 					</button>
 					</div>
 				</div>
-							
-
-        </div>
+				</div>
+				<div class="row" ng-repeat="x in searchResults">
+				<!-- <h5>{{x.photos[0].photo_reference}}</h5>				 -->
+					<div class="col s12 m3" > 
+						<div class="card">
+						    <div class="card-image waves-effect waves-block waves-light">
+						      <img ng-src="{{displayImage+x.image}}">
+						    </div>
+						    <div class="card-content">
+						      <span class="card-title activator grey-text text-darken-4">{{x.name}}<i class="material-icons right">more_vert</i></span>
+						      <p><a href="#">This is a link</a></p>
+						    </div>
+						    <div class="card-reveal">
+						      <span class="card-title grey-text text-darken-4">{{x.name}}<i class="material-icons right">close</i></span>
+						      <p>{{x.formatted_address}}</p>
+						    </div>
+						    </div>
+						</div>
+				</div>
+	     </div>
         
 		<!-- Login modal -->
 	<div id="login" class="modal">
@@ -54,9 +71,9 @@
 	      <div class="row">
 	      					<form action="" method="post">
 							<div class="input-field col s12">
-								<i class="material-icons prefix">email</i>
-								<input id="icon_prefix" type="email" class="validate" name="emailLogin" required>
-								<label for="icon_prefix">Email</label>
+								<i class="material-icons prefix">account_circle</i>
+								<input id="icon_prefix" type="text" class="validate" name="userName1" required>
+								<label for="icon_prefix">User Name</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix">vpn_key</i>
@@ -83,7 +100,7 @@
 	    <div class="modal-content">
 	      <h4>Signup</h4>
 	      <div class="row">
-	      <form action="api/signup.php" method="post" name="signupForm" ng-controller="signupValidation" onsubmit="return validateForm();">
+	      <form action="" method="post" onsubmit="return validateForm();">
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate" name="firstName" required>
@@ -94,13 +111,10 @@
 								<input id="icon_prefix" type="text" class="validate" name="lastName" required>
 								<label for="icon_prefix">Last Name</label>
 							</div>
-							<div class="input-field col s6 m6" >
-								<i class="material-icons prefix" id="userNameParent">email</i>
-								<input id="email" type="email" name="email" ng-model="email" ng-keyup="checkUsername();" class="validate" required="">
-								<label for="icon_prefix">Email</label>
-							</div>
-							<div class="col s6 m6" ng-hide="signupForm.email.$error.email">
-								<p id="signupResponse">{{signupResponse}}</p>
+							<div class="input-field col s12 m6" >
+								<i class="material-icons prefix" id="userNameParent">supervisor_account</i>
+								<input id="userName" type="text" name="userName" class="validate" required="">
+								<label for="icon_prefix">New User Name</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix" id="passwordParent">vpn_key</i>
@@ -112,7 +126,7 @@
 								<input id="confirmPassword" type="password" class="validate" onkeyup="checkPassword(this.value);">
 								<label for="icon_prefix">Re-type Password</label>
 								<div class="col s6">
-								<button class="btn waves-effect waves-light" type="submit"  name="signUp" >Sign Up
+								<button class="btn waves-effect waves-light" type="submit" name="signUp" >Sign Up
 								<i class="material-icons right">call_made</i>
 								</button>
 							</div>
