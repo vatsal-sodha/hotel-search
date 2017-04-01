@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 <head>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -14,17 +13,27 @@
 	<title>Nocturnal</title>
 </head>
 <body ng-app="search">
-<nav class="nav-extended white	">
+<nav class="nav-extended white"	ng-controller="navbar">
 			<div class="nav-wrapper">
 				<a href="#" class="brand-logo center blue-text">Nocturnal</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-				<ul id="nav-mobile" class="right hide-on-med-and-down black-text">
+				<ul ng-show="checkLogin()" id="nav-mobile" class="right hide-on-med-and-down black-text">
 					<li><a class="black-text" href="#login">Login</a></li>
 					<li><a class="black-text" href="#signup">Signup</a></li>
 				</ul>
-				<ul class="side-nav black-text" id="mobile-demo">
+				<ul ng-hide="checkLogin()" id="nav-mobile" class="right hide-on-med-and-down black-text">
+					<li><a class="black-text" href="">Welcome</a></li>
+					<li><a class="black-text" href="">{{userName}}</a></li>
+					<li ng-click="logout()"><a class="black-text" href="">Logout</a></li> 
+				</ul>
+				<ul ng-show="checkLogin()" class="side-nav black-text" id="mobile-demo">
 					<li><a class="black-text" href="#login">Login</a></li>
 					<li><a class="black-text" href="#signup">Signup</a></li>
+				</ul>
+				<ul ng-hide="checkLogin()" class="side-nav black-text" id="mobile-demo">
+					<li><a class="black-text" href="">Welcome</a></li>
+					<li><a class="black-text" href="">{{userName}}</a></li>
+					<li ng-click="logout"><a class="black-text" href="">Logout</a></li> 
 				</ul>
 			</div>
 		</nav>
@@ -51,20 +60,19 @@
 	    <div class="modal-content">
 	      <h4>Login</h4>
 
-	      <div class="row">
-	      					<form action="" method="post">
+	      <div class="row" ng-controller="login">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">email</i>
-								<input id="icon_prefix" type="email" class="validate" name="emailLogin" required>
+								<input id="icon_prefix" type="email" class="validate" name="emailLogin" required ng-model="emailLogin">
 								<label for="icon_prefix">Email</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix">vpn_key</i>
-								<input id="icon_prefix" type="password" class="validate" name="password1" required>
+								<input id="icon_prefix" type="password" class="validate" name="password1" ng-model="passwordLogin" required>
 								<label for="icon_prefix">Password</label>
 							</div>
 							<div class="col s6">
-								<button class="btn waves-effect waves-light" type="submit" name="login">Login
+								<button class="btn waves-effect waves-light" ng-click="isLogin()" type="submit" name="login">Login
 								<i class="material-icons right">input</i>
 								</button>
 							</div>
@@ -73,7 +81,6 @@
 								<i class="material-icons right">not_interested</i>
 								</button>
 							</div>
-						</form>
 	      </div>
 	      <!-- <p>A bunch of text</p> -->
 	    </div>

@@ -33,7 +33,8 @@ function checkPassword(str)
 }
 function validateForm(){
 	var password=checkPassword(document.getElementById("confirmPassword").value);
-	var username=document.getElementById("signupResponse").value;
+	var username=document.getElementById("signupResponse").innerHTML;
+	console.log(username);
 	if(password == true && username=="Unique username")
 	{
 		return true;
@@ -48,6 +49,14 @@ function validateForm(){
     	alert("Enter unique Username");
     	return false;
     }
+}
+
+function setSession(email)
+{
+	if (typeof(Storage) !== "undefined") {
+			localStorage.setItem("userName",email);
+			window.location.href="index.html";
+			}
 }
  var app=angular.module('search',[]);
  app.controller('searchHotels',function($scope,$http){
@@ -111,4 +120,76 @@ function validateForm(){
 	 	});
  
 	}
+	// $scope.isSignup=function(){
+
+	// 	var validation=validateForm();
+	// 	if(validation == true)
+	// 	{
+	// 		data={
+	// 		'email':$scope.email,
+	// 		'password':$scope.password,
+	// 		'firstName':$scope.firstName,
+	// 		'lastName':$scope.lastName
+	// 	};
+	// 	$http.post("api/login.php",data)
+	// 	.then(function(response){
+	// 		console.log(response);
+	// 		if(response.data == "1"){
+	// 			alert("Succesfully Signed Up");
+	// 			window.location.href="index.html";
+	// 		}
+	// 		// else if(response.data == "-1")
+	// 		else
+	// 		{
+	// 			alert("Sorry Something went wrong");
+	// 			window.location.href="index.html";
+	// 		}
+	// 	})
+	// 	}
+	// }
 });
+
+app.controller('login',function($scope,$http){
+
+	$scope.isLogin=function(){
+		data={
+			'email':$scope.emailLogin,
+			'password':$scope.passwordLogin
+		};
+		console.log(data);
+		$http.post("api/login.php",data)
+		.then(function(response){
+			console.log(response);
+				if(response.data == "1"){
+					setSession($scope.emailLogin);
+				}
+			else if(response.data == "-1"){
+				alert("Invalid Credentials");
+				// window.location.href="index.html";
+			}
+		})
+	}
+})
+
+app.controller("navbar",function($scope){
+
+	$scope.checkLogin=function(){
+		  if(localStorage.getItem('userName') !== null){
+		  	$scope.userName=localStorage.getItem('userName');
+		  	return false;
+		  }
+		  else{
+		  	return true;
+		  }
+	}
+
+	$scope.logout=function(){
+		console.log("inside logout");
+		if(localStorage.getItem('userName') !== null){
+		  	localStorage.removeItem('userName');
+		  	alert('Succesfully Logout');
+		  	window.location.href="index.html"
+		 }
+
+	}
+})
