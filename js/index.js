@@ -2,8 +2,10 @@
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
   });
- function hexToBase64(str) {
-    return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+
+function redirect(){
+	var query=document.getElementById("searchQuery").value;
+	window.location="search.html?q="+query;
 }
 function checkPassword(str)
 {
@@ -58,39 +60,8 @@ function setSession(email)
 			window.location.href="index.html";
 			}
 }
- var app=angular.module('search',[]);
- app.controller('searchHotels',function($scope,$http){
- 	var searchPlace="https://maps.googleapis.com/maps/api/place/textsearch/json?query=";
- 	var searchKey="&type=lodging&key=AIzaSyBXmAQo752-dXxxWiFgVGQf7Mv3BTwj7PY"; //API key
- 	var displayImage="data:image/JPEG;base64,";
-	var image="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=";
- 	var	imageKey="&key=AIzaSyBXmAQo752-dXxxWiFgVGQf7Mv3BTwj7PY";
- 	$scope.search = function()
- 	{
- 		console.log("Inside");
- 		$scope.displayImage=displayImage;
- 		$scope.imageUrl=image;
- 		$scope.imageKey=imageKey;
-	 	$http.get(searchPlace+$scope.query+searchKey)
-	 	.then(function(response){
-	 		console.log(response.data.results);
-	 		$scope.searchResults=response.data.results;
-	 		$scope.searchResults=$scope.searchResults.slice(0,3);
-	
-	 		// get image url
-	 		
 
-	 	});
-	 }
-	 $scope.searchFromIndex=function()
-	 {
-	 	$scope.query=$scope.query;
-	 	console.log("from index");
-	 	window.location.href="search.html";
-	 	$scope.search();
-	 }
-	 
- });
+var app=angular.module('index',[]);
 
  // signup validation
  app.controller('signupValidation',function($scope,$http){

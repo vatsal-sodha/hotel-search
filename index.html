@@ -12,7 +12,7 @@
 
 	<title>Nocturnal</title>
 </head>
-<body ng-app="search">
+<body ng-app="index">
 <nav class="nav-extended white"	ng-controller="navbar">
 			<div class="nav-wrapper">
 				<a href="#" class="brand-logo center blue-text">Nocturnal</a>
@@ -43,11 +43,11 @@
 		    	<div class="col s8 center-align" style="padding-top: 20em;">
 			        <div class="input-field col s8">
 			          <i class="material-icons prefix">search</i>
-			          <input id="" type="text" class="validate" >
+			          <input id="searchQuery" type="text" class="validate" >
 			          <label for="icon_prefix">Search here</label>
 			          </div>
 			         <div class="col s4" style="padding-top: 2em;">
-					<button class="btn waves-effect waves-light blue" type="submit" ng-click="searchFromIndex()" name="search2">Search
+					<button class="btn waves-effect waves-light blue" type="submit" onclick="redirect();" name="search2">Search
 					<i class="material-icons right">input</i>
 					</button>
 					</div>
