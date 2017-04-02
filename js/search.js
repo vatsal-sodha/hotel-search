@@ -1,6 +1,11 @@
 $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
+    
+     $('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 15 // Creates a dropdown of 15 years to control year
+  });
   });
 var app=angular.module('search',[]);
  app.controller('searchHotels',function($scope,$http){
@@ -29,7 +34,7 @@ var app=angular.module('search',[]);
 	 	.then(function(response){
 	 		console.log(response.data.results);
 	 		$scope.searchResults=response.data.results;
-	 		$scope.searchResults=$scope.searchResults.slice(0,3);
+	 		$scope.searchResults=$scope.searchResults.slice(0,1);
 	
 	 		// get image url
 	 		
