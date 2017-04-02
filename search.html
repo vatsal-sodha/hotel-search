@@ -43,16 +43,16 @@
 					</div>
 				</div>
 				</div>
-				<div class="row" ng-repeat="x in searchResults">
+				<div class="row" >
 				<!-- <h5>{{x.photos[0].photo_reference}}</h5>				 -->
-					<div class="col s12 m3" > 
+					<div class="col s12 m3" ng-repeat="x in searchResults"> 
 						<div class="card">
 						    <div class="card-image waves-effect waves-block waves-light">
-						      <img ng-src="{{displayImage+x.image}}">
+						      <img class="activator" height="300" src="{{imageUrl+x.photos[0].photo_reference+imageKey}}">
 						    </div>
 						    <div class="card-content">
 						      <span class="card-title activator grey-text text-darken-4">{{x.name}}<i class="material-icons right">more_vert</i></span>
-						      <p><a href="#">This is a link</a></p>
+						      <p><a href="#">Book Now</a></p>
 						    </div>
 						    <div class="card-reveal">
 						      <span class="card-title grey-text text-darken-4">{{x.name}}<i class="material-icons right">close</i></span>

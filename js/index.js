@@ -69,29 +69,25 @@ function setSession(email)
  	{
  		console.log("Inside");
  		$scope.displayImage=displayImage;
-
+ 		$scope.imageUrl=image;
+ 		$scope.imageKey=imageKey;
 	 	$http.get(searchPlace+$scope.query+searchKey)
 	 	.then(function(response){
 	 		console.log(response.data.results);
 	 		$scope.searchResults=response.data.results;
-	 		$scope.searchResults=$scope.searchResults.slice(0,1);
+	 		$scope.searchResults=$scope.searchResults.slice(0,3);
 	
 	 		// get image url
-	 		for(var x in $scope.searchResults)
-	 		{
-	 			// console.log($scope.searchResults[x]);
-	 			if($scope.searchResults[x].hasOwnProperty("photos"))
-	 			{
-		 			$http.get(image+$scope.searchResults[x].photos[0].photo_reference+imageKey)
-		 			.then(function(response){
-		 				console.log(type(response.data));
-		 				$scope.searchResults[x].image=hexToBase64(response.data);
-		 				console.log($scope.searchResults[x]);
-		 			});
-		 		}
-	 		}
+	 		
 
 	 	});
+	 }
+	 $scope.searchFromIndex=function()
+	 {
+	 	$scope.query=$scope.query;
+	 	console.log("from index");
+	 	window.location.href="search.html";
+	 	$scope.search();
 	 }
 	 
  });
