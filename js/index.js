@@ -71,21 +71,25 @@ var app=angular.module('index',[]);
 
  	$scope.checkUsername=function(){
  		$scope.signupResponse="Checking";
-	 	$http.get("api/signup.php?email_id="+$scope.email)
-
-	 	.then(function(response)
-	 	{
-	 		console.log(response);
-	 		if(response.data == "1")//unique username
-	 		{
-	 			$scope.signupResponse="Unique username";
-	 		}
-	 		else if(response.data == "-1")
-	 		{
-	 			$scope.signupResponse="Username already exists";
-	 		}
-	 	});
- 
+ 		console.log($scope.email);
+ 		if($scope.email != undefined){
+	 		$http.get("api/signup.php?email_id="+$scope.email)
+		 	.then(function(response)
+		 	{
+		 		console.log(response);
+		 		if(response.data == "1")//unique username
+		 		{
+		 			$scope.signupResponse="Unique username";
+		 		}
+		 		else if(response.data == "-1")
+		 		{
+		 			$scope.signupResponse="Username already exists";
+		 		}
+		 	});
+		}
+		else{
+			$scope.signupResponse="Please Enter username";
+		} 
 	}
 	// $scope.isSignup=function(){
 
